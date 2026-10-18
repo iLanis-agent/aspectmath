@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aspect Math - app</title>
+<style>
+  :root { --accent:#b0306a; --ink:#2a0f1c; --paper:#fbf2f6; --soft:#f6e0ea; }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:Georgia, "Times New Roman", serif; background:var(--paper); color:var(--ink); line-height:1.55; }
+  main { max-width:660px; margin:0 auto; }
+  .boundary { background:#fdeaea; border-left:6px solid #b03030; color:#5c1c1c; border-radius:6px; padding:1rem 1.1rem; }
+  .boundary strong { display:block; margin-bottom:.3rem; }
+  body { padding:2rem 1.2rem; }
+  h1 { font-size:1.8rem; color:var(--accent); }
+  .boundary { margin:1rem 0 1.4rem; }
+  .panel { background:var(--soft); border-left:5px solid var(--accent); border-radius:6px; padding:1rem 1.1rem; margin-bottom:1.1rem; }
+  h2 { font-size:1.1rem; margin-bottom:.6rem; }
+  p.note { font-size:.9rem; margin-bottom:.4rem; }
+  label { display:block; font-size:.9rem; margin:.45rem 0 .1rem; }
+  input, select { width:100%; padding:.45rem .55rem; font-size:1rem; border:1px solid #e5b8cc; border-radius:6px; background:#fff; color:var(--ink); }
+  .row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:.6rem; }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+  .out { margin-top:.7rem; font-size:.98rem; background:#fff; border:1px dashed #e5b8cc; border-radius:6px; padding:.6rem .7rem; min-height:2.4rem; }
+  .out.err { border-color:#b03030; color:#8a1f1f; }
+  footer { margin-top:1.8rem; font-size:.85rem; color:#8e5470; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Aspect Math</h1>
+  <div class="boundary">
+    <strong>Boundary: arithmetic only</strong>
+    This page works out aspect ratios, resized dimensions and fits from the pixel sizes you type. It does not know the sizes, ratios or cropping rules a screen, platform or printer requires. Check those in its own specs.
+  </div>
+
+  <div class="panel">
+    <h2>The ratio truth</h2>
+    <p class="note">The simplest whole-number ratio of a width and a height.</p>
+    <div class="row2">
+      <div><label for="a-w">Width (px)</label><input id="a-w" type="number" step="1" value="1920"></div>
+      <div><label for="a-h">Height (px)</label><input id="a-h" type="number" step="1" value="1080"></div>
+    </div>
+    <div class="out" id="a-out"></div>
+  </div>
+
+  <div class="panel">
+    <h2>The resize truth</h2>
+    <p class="note">Keep the shape and change the width.</p>
+    <div class="row2">
+      <div><label for="r-w">Width (px)</label><input id="r-w" type="number" step="1" value="1920"></div>
+      <div><label for="r-h">Height (px)</label><input id="r-h" type="number" step="1" value="1080"></div>
+      <div><label for="r-n">New width (px)</label><input id="r-n" type="number" step="1" value="1280"></div>
+      <div></div>
+    </div>
+    <div class="out" id="r-out"></div>
+  </div>
+
+  <div class="panel">
+    <h2>The fit truth</h2>
+    <p class="note">The largest size with the same shape that fits inside a box.</p>
+    <div class="row2">
+      <div><label for="f-w">Width (px)</label><input id="f-w" type="number" step="1" value="1920"></div>
+      <div><label for="f-h">Height (px)</label><input id="f-h" type="number" step="1" value="1080"></div>
+      <div><label for="f-bw">Box width (px)</label><input id="f-bw" type="number" step="1" value="1000"></div>
+      <div><label for="f-bh">Box height (px)</label><input id="f-bh" type="number" step="1" value="1000"></div>
+    </div>
+    <div class="out" id="f-out"></div>
+  </div>
+
+  <footer>Aspect Math is exact arithmetic over the numbers you enter. <a href="index.html">Why it exists</a>.</footer>
+</main>
+<script src="engine.js"></script>
+<script>
+  const num = (id) => Number(document.getElementById(id).value);
+  const list = (id) => document.getElementById(id).value.split(/[\s,]+/).filter((t) => t !== "").map(Number);
+  function show(id, fn) {
+    const out = document.getElementById(id);
+    try { out.textContent = fn(); out.classList.remove("err"); }
+    catch (e) { out.textContent = e.message; out.classList.add("err"); }
+  }
+  function recalc() {
+    show("a-out", () => ratioTruth(num("a-w"), num("a-h")));
+    show("r-out", () => resizeTruth(num("r-w"), num("r-h"), num("r-n")));
+    show("f-out", () => fitTruth(num("f-w"), num("f-h"), num("f-bw"), num("f-bh")));
+  }
+  document.querySelectorAll("input, select").forEach((el) => {
+    el.addEventListener("input", recalc);
+    el.addEventListener("change", recalc);
+  });
+  recalc();
+</script>
+</body>
+</html>
