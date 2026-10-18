@@ -1,0 +1,364 @@
+[
+ {
+  "fn": "ratioTruth",
+  "args": [
+   1920,
+   1080
+  ],
+  "expected": "1920 x 1080 is 16:9 (1.78 wide for each 1 tall)."
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   1080,
+   1920
+  ],
+  "expected": "1080 x 1920 is 9:16 (0.56 wide for each 1 tall)."
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   1000,
+   1000
+  ],
+  "expected": "1000 x 1000 is 1:1 (1 wide for each 1 tall)."
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   1366,
+   768
+  ],
+  "expected": "1366 x 768 is 683:384 (1.78 wide for each 1 tall)."
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   4,
+   3
+  ],
+  "expected": "4 x 3 is 4:3 (1.33 wide for each 1 tall)."
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   1,
+   100000
+  ],
+  "expected": "1 x 100000 is 1:100000 (under 0.01 wide for each 1 tall)."
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   100000,
+   1
+  ],
+  "expected": "100000 x 1 is 100000:1 (100000 wide for each 1 tall)."
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   2560,
+   1080
+  ],
+  "expected": "2560 x 1080 is 64:27 (2.37 wide for each 1 tall)."
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   0,
+   5
+  ],
+  "expected": "ERR:width must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   5,
+   0
+  ],
+  "expected": "ERR:height must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   100001,
+   5
+  ],
+  "expected": "ERR:width must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   5.5,
+   5
+  ],
+  "expected": "ERR:width must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "ratioTruth",
+  "args": [
+   -5,
+   5
+  ],
+  "expected": "ERR:width must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   1920,
+   1080,
+   1280
+  ],
+  "expected": "Scaling 1920 x 1080 to 1280 wide gives 1280 x 720."
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   1920,
+   1080,
+   1000
+  ],
+  "expected": "Scaling 1920 x 1080 to 1000 wide gives 1000 x 563 (exact height 562.5, rounded)."
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   1000,
+   1000,
+   1
+  ],
+  "expected": "Scaling 1000 x 1000 to 1 wide gives 1 x 1."
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   3,
+   2,
+   1
+  ],
+  "expected": "Scaling 3 x 2 to 1 wide gives 1 x 1 (exact height 0.67, rounded)."
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   3,
+   2,
+   2
+  ],
+  "expected": "Scaling 3 x 2 to 2 wide gives 2 x 1 (exact height 1.33, rounded)."
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   1920,
+   1080,
+   100000
+  ],
+  "expected": "Scaling 1920 x 1080 to 100000 wide gives 100000 x 56250."
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   1,
+   1,
+   100000
+  ],
+  "expected": "Scaling 1 x 1 to 100000 wide gives 100000 x 100000."
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   1920,
+   1080,
+   0
+  ],
+  "expected": "ERR:new width must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   0,
+   1080,
+   5
+  ],
+  "expected": "ERR:width must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   1920,
+   0,
+   5
+  ],
+  "expected": "ERR:height must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   1920,
+   1080,
+   100001
+  ],
+  "expected": "ERR:new width must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "resizeTruth",
+  "args": [
+   1920,
+   1080,
+   640.5
+  ],
+  "expected": "ERR:new width must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1920,
+   1080,
+   1000,
+   1000
+  ],
+  "expected": "Fitting 1920 x 1080 inside 1000 x 1000 gives 1000 x 563 after rounding to whole pixels, with 437 pixels spare on the height."
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1920,
+   1080,
+   1920,
+   1080
+  ],
+  "expected": "Fitting 1920 x 1080 inside 1920 x 1080 gives 1920 x 1080, which fills the box."
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1920,
+   1080,
+   3840,
+   2160
+  ],
+  "expected": "Fitting 1920 x 1080 inside 3840 x 2160 gives 3840 x 2160, which fills the box."
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1080,
+   1920,
+   1000,
+   1000
+  ],
+  "expected": "Fitting 1080 x 1920 inside 1000 x 1000 gives 563 x 1000 after rounding to whole pixels, with 437 pixels spare on the width."
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1000,
+   1000,
+   500,
+   800
+  ],
+  "expected": "Fitting 1000 x 1000 inside 500 x 800 gives 500 x 500, with 300 pixels spare on the height."
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1000,
+   1000,
+   800,
+   500
+  ],
+  "expected": "Fitting 1000 x 1000 inside 800 x 500 gives 500 x 500, with 300 pixels spare on the width."
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   4,
+   3,
+   16,
+   9
+  ],
+  "expected": "Fitting 4 x 3 inside 16 x 9 gives 12 x 9, with 4 pixels spare on the width."
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   3,
+   2,
+   1,
+   1
+  ],
+  "expected": "Fitting 3 x 2 inside 1 x 1 gives 1 x 1 after rounding to whole pixels, which fills the box."
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1,
+   1,
+   100000,
+   100000
+  ],
+  "expected": "Fitting 1 x 1 inside 100000 x 100000 gives 100000 x 100000, which fills the box."
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1920,
+   1080,
+   960,
+   540
+  ],
+  "expected": "Fitting 1920 x 1080 inside 960 x 540 gives 960 x 540, which fills the box."
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   0,
+   1080,
+   5,
+   5
+  ],
+  "expected": "ERR:width must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1920,
+   1080,
+   0,
+   5
+  ],
+  "expected": "ERR:box width must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1920,
+   1080,
+   5,
+   100001
+  ],
+  "expected": "ERR:box height must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1920,
+   1080,
+   5,
+   2.5
+  ],
+  "expected": "ERR:box height must be a whole number from 1 to 100000"
+ },
+ {
+  "fn": "fitTruth",
+  "args": [
+   1921,
+   1080,
+   1000,
+   563
+  ],
+  "expected": "Fitting 1921 x 1080 inside 1000 x 563 gives 1000 x 562 after rounding to whole pixels, with 1 pixel spare on the height."
+ }
+]
